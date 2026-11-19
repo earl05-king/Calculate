@@ -20,7 +20,7 @@
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            width: 580px;
+            width: 540px;
             max-width: 95%;
         }
         .header-container {
@@ -83,22 +83,13 @@
             font-size: 13px;
             width: 55px;
         }
-        .color-picker {
-            width: 28px;
-            height: 28px;
-            padding: 0;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            cursor: pointer;
-            background: none;
-        }
         .inputs-group {
             display: flex;
             align-items: center;
             gap: 8px;
         }
         .calc-row input[type="number"] {
-            width: 55px;
+            width: 65px;
             padding: 6px;
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -132,7 +123,7 @@
             font-size: 14px;
             font-weight: bold;
             color: #28a745;
-            width: 75px;
+            width: 85px;
             text-align: right;
         }
         .grand-total-container {
@@ -180,25 +171,25 @@
         // =====================================================================
         // CUSTOMIZE ROW COLORS HERE
         // Key = Row number (1, 2, 3, ...), Value = { bg, border, accent }
-        // You can use hex (#ffebee), rgb(), or named colors (lightcoral).
+        // Use 6-digit hex codes for `accent` (e.g., "#e53935").
         // =====================================================================
         const defaultRowColors = {
             1: { bg: "#ffebee", border: "#ef9a9a", accent: "#e53935" },
-            2: { bg: "#fff3e0", border: "#ffcc80", accent: "#fb8c00" },
-            3: { bg: "#fffde7", border: "#fff59d", accent: "#fbc02d" },
-            4: { bg: "#f1f8e9", border: "#c5e1a5", accent: "#7cb342" },
-            5: { bg: "#e8f5e9", border: "#a5d6a7", accent: "#43a047" },
-            6: { bg: "#e0f2f1", border: "#80cbc4", accent: "#00897b" },
-            7: { bg: "#e0f7fa", border: "#80deea", accent: "#00acc1" },
-            8: { bg: "#e3f2fd", border: "#90caf9", accent: "#1e88e5" },
-            9: { bg: "#ede7f6", border: "#b39ddb", accent: "#5e35b1" },
-            10: { bg: "#fce4ec", border: "#f48fb1", accent: "#d81b60" }
+            2: { bg: "#fff3e0", border: "#ffcc80", accent: "#2563eb" },
+            3: { bg: "#fffde7", border: "#fff59d", accent: "#00FFF0" },
+            4: { bg: "#f1f8e9", border: "#c5e1a5", accent: "#008000" },
+            5: { bg: "#e8f5e9", border: "#000000", accent: "#FFFFFF" },
+            6: { bg: "#e0f2f1", border: "#80cbc4", accent: "#FF69B4" },
+            7: { bg: "#e0f7fa", border: "#80deea", accent: "#000000" },
+            8: { bg: "#e3f2fd", border: "#90caf9", accent: "#FFFF00" },
+            9: { bg: "#ede7f6", border: "#b39ddb", accent: "#800080" },
+            10: { bg: "#fce4ec", border: "#f48fb1", accent: "#808080 " }
         };
 
         // Fallback color palette for extra rows beyond row 10
         const extraRowPalette = [
-            { bg: "#f3e5f5", border: "#ce93d8", accent: "#8e24aa" },
-            { bg: "#efebe9", border: "#bcaaa4", accent: "#6d4c41" },
+            { bg: "#f3e5f5", border: "#ce93d8", accent: "#895129" },
+            { bg: "#efebe9", border: "#bcaaa4", accent: "#FFA500" },
             { bg: "#eceff1", border: "#b0bec5", accent: "#546e7a" }
         ];
 
@@ -213,7 +204,6 @@
             const rowDiv = document.getElementById('row_' + rowNum);
             if (!rowDiv) return;
 
-            // Lighten accentHex slightly for a soft row background tint
             const cleanHex = accentHex.replace('#', '');
             const r = parseInt(cleanHex.substring(0, 2), 16);
             const g = parseInt(cleanHex.substring(2, 4), 16);
@@ -248,7 +238,6 @@
             
             rowDiv.innerHTML = `
                 <span class="row-label">Row ${rowCount}</span>
-                <input type="color" class="color-picker" id="color_${rowCount}" value="${colorCfg.accent}" title="Change Row ${rowCount} color" oninput="applyRowColor(${rowCount}, this.value)">
                 <div class="inputs-group">
                     <input type="number" id="n${rowCount}_a" class="multiplier-input" value="${defaultMultiplier}">
                     <span class="operator">×</span>
